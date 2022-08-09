@@ -1,0 +1,100 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+:root{
+    --headerAndFooterBackgroundColors: rgb(52, 52, 161);
+}
+/* HEADER SECTION START */
+.header{
+    text-align: center;
+    background-color: var(--headerAndFooterBackgroundColors);
+    color: white;
+}
+
+header h1{
+    font-size: 7vw;
+}
+/* HEADER SECTION END */
+
+/* MAIN SECTION START*/
+.mainWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#gameSettings{
+    display: flex;
+    justify-content: space-evenly;
+    width: 40%;
+    margin: 10px 0px 10px 0px;
+    
+}
+
+#gameBoardContainer{
+    border: 2px solid black;
+    height: 500px;
+    width: 500px;
+}
+/* MAIN SECTION END*/
+
+/* FOOTER STYLING START */
+.footer {
+    color: black;
+    padding: 10px 0px 5px 0px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.gitLink {
+    text-decoration: none;
+    color: black;
+}
+
+.gitLink:hover{
+    color: red;
+}
+/* FOOTER STYLING END */
+
+
+/* MEDIA QUERIES START */
+@media (max-width: 600px){
+    #gameBoardContainer{
+        height: 400px;
+        width: 400px;
+    }
+    footer {
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 425px){
+    #gameBoardContainer{
+        height: 300px;
+        width: 300px;
+    }
+}
+
+@media (max-height: 550px){
+    #gameBoardContainer{
+        height: 300px;
+        width: 300px;
+    }
+}
+
+@media (max-width: 780px){
+    #gameSettings{
+        flex-direction: column;
+        align-items: center;
+    }
+    #gameSettings .flex-item{
+        margin-top: 5px 0px 5px 0px;
+        display: flex;
+        justify-content: space-between;
+        width: 55%;
+    }
+}
