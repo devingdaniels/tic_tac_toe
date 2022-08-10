@@ -49,6 +49,23 @@ header h1{
     border: 1px solid gray;
 }
 
+#resultContainer{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100px;
+    width: 300px;
+    border: 1px solid;
+    box-shadow: 2px 5px 12px rgb(80, 105, 228);
+    background-color: aliceblue;
+}
+.resultContainerWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
 /* MAIN SECTION END*/
 
 /* FOOTER STYLING START */
