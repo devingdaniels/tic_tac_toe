@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Images/favicon-16x16.png" type="image/x-icon">
     <title>Tic-Tac-Toe</title>
 </head>
 
@@ -13,37 +14,29 @@
     <header class="header">
         <h1>Tic-Tac-Toe</h1>
     </header>
-    <main>
+    <main id="main">
         <div class="mainWrapper">
             <div id="gameSettings">
-                <!-- <div class="flex-item">
-                    <label for="twoPlayerMode">1 v 1</label>
-                    <input type="radio" name="currentMode" id="twoPlayerMode">
-                </div> -->
-                <h1 id="messageField">Message Field</h1>
+                <h1 id="messageField"></h1>
                 <button type="button" id="restartGame">Restart</button>
-                <!-- <div class="flex-item">
-                    <label for="onePlayerMode">YOU vs AI</label>
-                    <input type="radio" name="currentMode" id="onePlayerMode">
-                </div> -->
             </div>
             <div id="gameBoardContainer"></div>
         </div>
-        <div id="resultContainer" action="#" method="post">
-            <div class="resultContainerWrapper">
-            <h1 id="displayGameResult">Winner</h1>
+    </main>
+    <div id="resultContainer" action="#" method="post">
+        <div class="resultContainerWrapper">
+            <h1 id="displayGameResult"></h1>
             <button type="button" id="restartGamePopUp">Restart</button>
         </div>
-        </div>
+    </div>
 
-    </main>
     <footer class="footer">
         <p>
             Copyright©
             <script>
                 document.write(new Date().getFullYear())
             </script>
-           GitHub:
+           Creator:
             <a href="https://github.com/devingdaniels" target="_blank" class="gitLink">
                 devingdaniels
                 </a>
@@ -51,7 +44,3 @@
           </footer>
 </body>
 </html>
-
-
-
-

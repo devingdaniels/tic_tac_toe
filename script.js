@@ -76,20 +76,18 @@ const displayController = (()=>{
     }
     return 
    }
-
-
-   
-
 return {renderBoard, updateBoard}
 })();
 
 // TIC-TAC-TOE GAME LOGIC MODULE
 const TicTacToeModule = (() => {
+    const main = document.getElementById('main')
     // Element that pops up on win/draw
     const resultContainer = document.getElementById('resultContainer')
     // H1 inside the popup that displays the game status
     const displayGameResult = document.getElementById('displayGameResult')
-
+    //Display the turn of current player
+    const messageField = document.getElementById('messageField')
     // render the board
     displayController.renderBoard()
     // create two player objects
@@ -97,6 +95,16 @@ const TicTacToeModule = (() => {
     const playerTwo = Player("O")
     // tracks current round for 'X' / "O"
     let round = 2
+
+    const getCurrentPlayer = () => {
+        return round % 2 === 0 ? playerOne.getSign() : playerTwo.getSign()
+       }
+
+   const updateCurrentPlayerMessage = () => {
+    messageField.textContent = `Turn: ${getCurrentPlayer()}`
+   }
+
+   updateCurrentPlayerMessage()
 
    const playRound = e => {
     // get and save the index of the target index
@@ -114,7 +122,7 @@ const TicTacToeModule = (() => {
         
         // check for win
         if (checkWin()){
-            displayGameResult.textContent = `${getCurrentPlayer()} is the winner`
+            displayGameResult.textContent = `${getCurrentPlayer()} Wins`
             showGameResultContainer()
         }
         // check for draw
@@ -122,8 +130,12 @@ const TicTacToeModule = (() => {
             displayGameResult.textContent = "Draw"
             showGameResultContainer()
         }
-        // increment the round
-        round++
+        if (!checkWin() && !checkDraw()){
+            // increment the round
+            round++
+            // update the current player UI
+            updateCurrentPlayerMessage()
+        }
     }
    }
 
@@ -184,24 +196,21 @@ const TicTacToeModule = (() => {
      // reset the array
      GameBoardModule.resetGameBoard()
      displayController.renderBoard()
-     // render a new board
-     // reset the round number
      round = 2
+     messageField.textContent = "Turn: X"
    }
 
    const showGameResultContainer = ()=> {
     resultContainer.style.display = "block"
+    main.style.pointerEvents = "none"
    }
 
    const hideGameResultContainer = ()=> {
     resultContainer.style.display = "none"
+    main.style.pointerEvents = "all"
     }
-
-   const getCurrentPlayer = () => {
-    return round % 2 === 0 ? playerOne.getSign() : playerTwo.getSign()
-   }
    
    return {
-    getCurrentPlayer, playRound
+    getCurrentPlayer, playRound,updateCurrentPlayerMessage
    }
 })();
