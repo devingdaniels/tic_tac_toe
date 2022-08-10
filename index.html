@@ -9,7 +9,6 @@
     <title>Tic-Tac-Toe</title>
 </head>
 
-
 <body>
     <header class="header">
         <h1>Tic-Tac-Toe</h1>
@@ -17,19 +16,21 @@
     <main>
         <div class="mainWrapper">
             <div id="gameSettings">
-                <div class="flex-item">
-                    <label for="twoPlayerMode">Human VS Human</label>
+                <!-- <div class="flex-item">
+                    <label for="twoPlayerMode">1 v 1</label>
                     <input type="radio" name="currentMode" id="twoPlayerMode">
-                </div>
-                <div class="flex-item">
-                    <label for="onePlayerMode">Human VS AI</label>
+                </div> -->
+                <h1 id="messageField">Message Field</h1>
+                <button type="button" id="restartGame">Restart</button>
+                <!-- <div class="flex-item">
+                    <label for="onePlayerMode">YOU vs AI</label>
                     <input type="radio" name="currentMode" id="onePlayerMode">
-                </div>
+                </div> -->
             </div>
             <div id="gameBoardContainer"></div>
         </div>
-    </main>
 
+    </main>
     <footer class="footer">
         <p>
             Copyright©
@@ -42,6 +43,5 @@
                 </a>
         </p>
           </footer>
-
 </body>
 </html>
