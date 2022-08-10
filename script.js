@@ -83,9 +83,11 @@ const displayController = (()=>{
 return {renderBoard, updateBoard}
 })();
 
-// TICTACTOE GAME LOGIC MODULE
+// TIC-TAC-TOE GAME LOGIC MODULE
 const TicTacToeModule = (() => {
+    // Element that pops up on win/draw
     const resultContainer = document.getElementById('resultContainer')
+    // H1 inside the popup that displays the game status
     const displayGameResult = document.getElementById('displayGameResult')
 
     // render the board
@@ -95,11 +97,6 @@ const TicTacToeModule = (() => {
     const playerTwo = Player("O")
     // tracks current round for 'X' / "O"
     let round = 2
-
-    
-   const getCurrentPlayer = () => {
-    return round % 2 === 0 ? playerOne.getSign() : playerTwo.getSign()
-   }
 
    const playRound = e => {
     // get and save the index of the target index
@@ -131,7 +128,36 @@ const TicTacToeModule = (() => {
    }
 
    const checkWin = () => {
-        //
+        const winConditions = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+            [0,4,8],
+            [2,4,6]
+        ]
+
+        let winner = false
+        let temp = []
+
+        winConditions.forEach(element =>{
+            for (let i = 0; i < element.length; i++){
+                let index = element[i]
+                temp.push(GameBoardModule.getMove(index)) 
+            }
+            const allEqual = arr => arr.every( v => {
+                if (v === arr[0] && arr[0] !== ""){
+                    return true
+                }
+            })
+            if (allEqual(temp) === true && temp.length > 2){
+                winner = true
+            }
+            temp = []
+        })
+        return winner
    }
 
     const checkDraw = () => {
@@ -170,84 +196,12 @@ const TicTacToeModule = (() => {
    const hideGameResultContainer = ()=> {
     resultContainer.style.display = "none"
     }
+
+   const getCurrentPlayer = () => {
+    return round % 2 === 0 ? playerOne.getSign() : playerTwo.getSign()
+   }
    
    return {
     getCurrentPlayer, playRound
    }
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-Global Variables:
-const DEFAULT_MODE = twoPlayer
-let currentMode = DEFAULT_MODE
-
-
-1) Webpage loads
-    - Empty Game board is rendered 
-    - Human VS Human is selected by default (set radio button to be active, h vs ai is non-active)
-    - Each square on the board has an active event lister, game begins as soon as player 1 makes a move
-
-    - create player objects 
-    - create gameBrain object 
-
-
-
-2) Player objects 
-
-    - Each player needs a symbol property 
-
-    if currentMode === h vs h
-    - Player 1 will be 'x' & player 2 will be 'o'
-    if currentMode === h VS ai
-    - Player 1 will 'x' & AI will be 'o' 
-
-
-3) GameBrain
-
-    // check for the current mode
-        -set the current mode
-
- 
-
-
-    }
-
-    
-onclick for human vs human and human vs AI
-    - if the selected mode is different from the current mode, update the mode and restart the game
-
-onclick for restart the game
-    -render a new game board
-
-
-const twoPlayerMode = "twoPlayerMode"
-const onePlayerMode = "onePlayerMode"
-let currentMode = twoPlayerMode
-
-
-
-const restartGame = document.getElementById('restartGame')
-restartGame.onclick = () => alert('code restart button logic')
-
-
-*/
-
-
-
