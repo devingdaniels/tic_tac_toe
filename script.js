@@ -11,16 +11,14 @@ const Player = (sign) => {
   
 // GameBoard Module
 const GameBoardModule = (() => {
-
     const BOARD_SIZE = 9
-   const gameBoard = ['','','','','','','','','']
-
-   const isValidMove = (index) => {
+    const gameBoard = ['','','','','','','','','']
+    const isValidMove = (index) => {
         if (gameBoard[index] === ""){
             return true
         }
         return false
-   }
+    }
 
    const setMove = (index, sign) => {
     gameBoard[index] = sign
@@ -50,7 +48,7 @@ const displayController = (()=>{
     while (gameBoardContainer.firstChild) {
         gameBoardContainer.removeChild(gameBoardContainer.firstChild);
     }
-    //
+    // For each created game board element, add index label and event lister
     let index = 0;
     for (let i = 0; i < GameBoardModule.BOARD_SIZE; i++){
         const boardElement = document.createElement('div')
@@ -62,7 +60,6 @@ const displayController = (()=>{
         gameBoardContainer.appendChild(boardElement)
         index++
     }
-    updateBoard()
    }
 
    const updateBoard = () =>{
@@ -86,7 +83,7 @@ const TicTacToeModule = (() => {
     const resultContainer = document.getElementById('resultContainer')
     // H1 inside the popup that displays the game status
     const displayGameResult = document.getElementById('displayGameResult')
-    //Display the turn of current player
+    // Display the turn of current player
     const messageField = document.getElementById('messageField')
     // render the board
     displayController.renderBoard()
@@ -94,25 +91,24 @@ const TicTacToeModule = (() => {
     const playerOne = Player("X")
     const playerTwo = Player("O")
     // tracks current round for 'X' / "O"
+    // using two for easier math
     let round = 2
-
-    const getCurrentPlayer = () => {
-        return round % 2 === 0 ? playerOne.getSign() : playerTwo.getSign()
-       }
-
-   const updateCurrentPlayerMessage = () => {
-    messageField.textContent = `Turn: ${getCurrentPlayer()}`
+    // Function that paints UI element 'x' or 'O'
+    const updateCurrentPlayerMessage = () => {
+        messageField.textContent = `Turn: ${getCurrentPlayer()}`
+    }
+    // Determines current player turn 
+   const getCurrentPlayer = () => {
+    return round % 2 === 0 ? playerOne.getSign() : playerTwo.getSign()
    }
-
-   updateCurrentPlayerMessage()
-
+    // Display the initial player; will always be 'x'
+    updateCurrentPlayerMessage()
+   // Main game logic 
    const playRound = e => {
     // get and save the index of the target index
     let index = e.target.dataset.index
-    console.log(index)
     // check and make sure index of move is not already taken
     if (GameBoardModule.isValidMove(index)){
-        console.log('move is valid')
         // get the current player
         let sign = getCurrentPlayer()
         // add the move (index on the board and current player sign to the array)
@@ -150,10 +146,10 @@ const TicTacToeModule = (() => {
             [0,4,8],
             [2,4,6]
         ]
-
+        // Assume there is no winner yet
         let winner = false
+        // 
         let temp = []
-
         winConditions.forEach(element =>{
             for (let i = 0; i < element.length; i++){
                 let index = element[i]
@@ -164,7 +160,7 @@ const TicTacToeModule = (() => {
                     return true
                 }
             })
-            if (allEqual(temp) === true && temp.length > 2){
+            if (allEqual(temp) === true){
                 winner = true
             }
             temp = []
@@ -178,17 +174,13 @@ const TicTacToeModule = (() => {
                 return false
             }
         }
+        // Inner HTML contains no empty strings
         return true
    }
 
    const restartGamePopUP = document.getElementById('restartGamePopUp')
    restartGamePopUP.onclick = () => {
     hideGameResultContainer()
-    resetGameState()
-   }
-
-   const restartGame = document.getElementById('restartGame')
-   restartGame.onclick = () => {
     resetGameState()
    }
 
@@ -210,7 +202,12 @@ const TicTacToeModule = (() => {
     main.style.pointerEvents = "all"
     }
    
+   const restartGame = document.getElementById('restartGame')
+   restartGame.onclick = () => {
+    resetGameState()
+   }
+
    return {
-    getCurrentPlayer, playRound,updateCurrentPlayerMessage
+    getCurrentPlayer, playRound, updateCurrentPlayerMessage
    }
 })();
