@@ -13,12 +13,7 @@ const Player = (sign) => {
 const GameBoardModule = (() => {
   const BOARD_SIZE = 9;
   const gameBoard = ["", "", "", "", "", "", "", "", ""];
-  const isValidMove = (index) => {
-    if (gameBoard[index] === "") {
-      return true;
-    }
-    return false;
-  };
+  const isValidMove = (index) => gameBoard[index] === "";
 
   const setMove = (index, sign) => {
     gameBoard[index] = sign;
@@ -151,20 +146,27 @@ const TicTacToeModule = (() => {
       [0, 4, 8],
       [2, 4, 6],
     ];
-
-    for (const element of winConditions) {
-      const temp = [];
-      for (const index of element) {
+    // Assume there is no winner yet
+    let winner = false;
+    //
+    let temp = [];
+    winConditions.forEach((element) => {
+      for (let i = 0; i < element.length; i++) {
+        let index = element[i];
         temp.push(GameBoardModule.getMove(index));
       }
-      const allEqual = (arr) => arr.every((v) => v === arr[0] && arr[0] !== "");
-
-      if (allEqual(temp)) {
-        return true; // Found a winner, no need to continue checking
+      const allEqual = (arr) =>
+        arr.every((v) => {
+          if (v === arr[0] && arr[0] !== "") {
+            return true;
+          }
+        });
+      if (allEqual(temp) === true) {
+        winner = true;
       }
-    }
-
-    return false; // No winner found
+      temp = [];
+    });
+    return winner;
   };
 
   const checkDraw = () => {
